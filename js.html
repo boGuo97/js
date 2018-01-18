@@ -5,19 +5,134 @@
 	<title>1000以内7的倍数</title>
 </head>
 <body>
+	<header>
+		
+	</header>
 	<script>
-		var a=1;
-		while(a<1000){
-			a=a+1
-			if(a % 7==0){
-			console.log(a)
+		// var a=1;
+		// var b=0;
+		// while(a<1000){
+		// 	if(a % 13==0){
+		// 		console.log(a)
+		// 		b++;//记录进来的a的次数，进来一次b自加一次
+		// 	}
+		// 	a++;//循环1000次
+			
+		// }
+		// console.log("1-1000中一共有"+b+"个13的倍数");
+
+
+
+
+	//输出1-n（随意数字）累加之和。例如n=100,则1+2+3+..+100
+		// var a=1;
+		// var b=0;
+		// var c=0;
+		// while(a<=100)	{
+		// 	b=b+a
+		// 	a++;
+		// 	if(b%3==0&&b%5==0){
+		// 		console.log(b)
+		// 	}
+		// }
+		// 	console.log(b)
+			
+			// var a=2018;
+			// var b=1;
+			// var c=0;
+			// while(b<=20){
+			// 	c=b+a	
+			// 	if(c%4==0&&c%100!=0){
+			// 		console.log(c)
+			// 		b++;
+			// 	}
+			// 	a++
+			// }
+			// var a=5;
+			// var b= (--a)*2;
+			// console.log((a++)*(--b))
+			// console.log(a)
+			// console.log(b)
+			// var a="郭博"
+			// var b="abc"
+			// var c="111"
+			// Number(a)
+			// console.log(Number(c))
+			// console.log(String(222))
+			// console.log(Boolean(0))
+			// console.log(Boolean("111"))
+			// console.log(Boolean(""))
+			// console.log(typeof Boolean("NaN"))
+			// console.log(Boolean(NaN))
+			// console.log(Number(a))
+			// console.log(typeof Number("abc"))
+
+			// function add(){
+			// 	var a=0;
+			// 	var sum=0;
+			// 	while(a<arguments.length){
+			// 		console.log(arguments[a])
+			// 		sum = sum+arguments[a]
+			// 		a++;
+			// 	}
+			// 	console.log(sum);
+			// 	return 10;
+			// }
+			// console.log(add(4,7,5,2,1,3.1415926))
+			// function add(){
+			// 	var a=0;
+			// 	var sum=0;
+			// 	while(a<arguments.length){
+			// 		if(typeof(arguments[a]) == "number"&&Boolean(arguments[a])==true && arguments[a]!=Infinity){
+			// 			sum = sum+arguments[a]
+			// 		}
+			// 		else{
+			// 			var c = arguments[a]
+			// 			console.log("在数组中------→"+"下标 ----→   "+a+"     发现非数字  "+c)
+			// 		}
+			// 		a++;
+			// 	}
+			// 	return sum;
+			// // }
+			// console.log(add(1,1,1," 帅博 ",1,NaN," 帅祥 ",Infinity,undefined))
+			// console.log(2==true)
+			// var arr = [12,5,7,69,588,4,65,44,999,32,0,-100];
+			// document.write(arr+"<br/>")
+			// var b;
+			// for(var i = 0;i < arr.length-1;i++){
+			// 	for(var k = 0;k < arr.length-1-i;k++){
+			// 		if(arr[k]>arr[k+1]){
+			// 			b = arr[k];
+			// 			arr[k] = arr[k+1];
+			// 			arr[k+1] = b;
+			// 		}
+			// 	}
+			// 	console.log(arr)
+			// 	document.write("第"+(i+1)+"次　　　"+arr+"<br/>"	)
+			// }
+			// console.log(arr)
+			var obj={
+				姓名:"郭博",
+				年龄:13,
+				性别:"男",
+				学历:"大专",
+				出生年月:"2004-12-01",
+				婚姻状况:"未成年"
 			}
-		}
-		for(var a=1;a<1000;a++){
-			if(a%7==0){
-			console.log(a)
+			obj.身高 = "净身高150cm"
+			obj.年龄 = 14
+			obj.爱好 = "热爱学习，喜欢户外运动"
+			delete obj.性别
+			console.log(obj)
+			for(var i in obj){
+				console.log(obj[i])
 			}
-		}
+			var Array = ["郭博",13,'自律行不行，是我的缺点']
+			for(var s in Array){
+				console.log(Array[s])
+			}
+			console.log(document.write("<h1 from:red>郭博</h1>"))
+			// document.write("<style>h1{color="red";}</style>")
 	</script>
 </body>
 </html>

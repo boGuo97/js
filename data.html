@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>tata</title>
+	
+	<style>
+		*{font-family: "华文新魏"}
+		p{font-size: 20px;color:purple}
+		span{font-size: 18px;color: red;}
+		h1{color: rgb(128,0,0);}
+	</style>
+</head>
+<body>
+	<script src="js/data.js"></script>
+	<script>
+		for(var i = 0; i<data.length;i++){
+			document.write("<h1>"+data[i].name+"<h1/>");
+			var cityArray=data[i].city
+			for(var y=0;y<cityArray.length;y++){
+				document.write("<p>"+cityArray[y].name+"</p>");
+				// console.log(cityArray[y])
+				var areaArray=cityArray[y].area;
+				for(var u = 0;u<areaArray.length;u++){
+					document.write("<span>"+areaArray[u]+"</span>")
+					if(u<areaArray.length-1){
+						document.write(",")
+					}
+				}
+				document.write("<hr/>")
+			}
+			document.write("<hr/>");
+		}
+	</script>
+</body>
+</html>
