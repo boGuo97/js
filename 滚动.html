@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		body{background-color: #ddd;}
+		header{width: 1000px;position: relative;margin:0 auto;overflow: hidden;margin-top: 100px;border-radius: 10px;height: 409px;}
+		ul{width: 6000px;position: relative;left: 0;}
+		ul:after{
+			content: "";
+			display: block;
+			clear: both;
+		}
+		li{list-style: none;float: left;width: 1000px;}
+		#left,#right{
+			position: absolute;top: 45%;cursor: pointer;transition:all .5s;
+		}
+		#left:hover,#right:hover{transform:scale(1.2) }
+		#left{left: 20px;}
+		#right{right: 20px;}
+		#dian{position: absolute;bottom: 15px;overflow: hidden;left: 40%;}
+		#dian span{display: block;width: 15px;height: 15px;border-radius: 50%;
+			background-color: rgb(255,255,255);float: left;margin-left: 10px;
+			font-size: 0;cursor: pointer;
+		}
+		#dian .spanA{background-color: rgb(128,0,0)}
+	</style>
+</head>
+<body>
+	<header id="wrap">
+		 <ul id="nav" style="left:0;">
+		 	<li><img src="img/1.jpg" alt=""></li>
+		 	<li><img src="img/2.jpg" alt=""></li>
+		 	<li><img src="img/3.jpg" alt=""></li>
+		 	<li><img src="img/4.jpg" alt=""></li>
+		 	<li><img src="img/5.jpg" alt=""></li>
+		 	<li><img src="img/6.jpg" alt=""></li>
+		 </ul>
+		 <img src="img/l.png" alt="" id="left">
+		 <img src="img/r.png" alt="" id="right">
+		 <div id="dian">
+		 	<span class="spanA">0</span>
+		 	<span>1</span>
+		 	<span>2</span>
+		 	<span>3</span>
+		 	<span>4</span>
+		 	<span>5</span>
+		 </div>
+	 </header>
+	 <script>
+	 	var right = document.getElementById("right")
+	 	var nav = document.getElementById("nav")
+	 	var navList = nav.getElementsByTagName("li")
+	 	var n = 0;//记录当前在第几张
+	 	function navA(){
+	 		n++;
+			if(n<navList.length){//规定正常情况
+	 			var T1 = setInterval(function(){    //写入一个计时器
+	 				var Nar = -(n*1000)
+					var ml = parseInt(nav.style.left)//把获取的值强制转换为Number类型
+	 					if(ml !== Nar){   //判断ml !== 时执行下一步
+	 						nav.style.left = ml + Math.floor((Nar-ml)/10)+"px"
+	 					}
+	 					else{
+	 						clearInterval(T1)
+	 					}
+	 					for(var k = 0;k<navList.length;k++){
+	 						Gbb[k].className = "";
+	 					}
+	 						Gbb[n].className = "spanA";
+	 			},30)
+			}
+			else{
+				n = 0;
+				var T1 = setInterval(function(){    //写入一个计时器
+	 				var Nar = -(n*1000)
+					var ml = parseInt(nav.style.left)//把获取的值强制转换为Number类型
+	 					if(ml !== Nar){   //判断ml !== 时执行下一步
+	 						nav.style.left = ml + Math.ceil((Nar-ml)/10)+"px"
+	 					}
+	 					else{
+	 						clearInterval(T1)
+	 					}
+	 			},30)
+			}
+	 	}
+	 	right.onclick = function(){
+	 		navA()
+	 	}
+	 	var left = document.getElementById("left");
+	 	function navB(){
+	 		n--
+	 		if(n !== -1){
+	 			var T1 = setInterval(function(){
+	 			var mk = parseInt(nav.style.left)
+	 			var Bar = -(n*1000)
+	 				if(mk !== Bar){
+	 					nav.style.left = mk + Math.ceil((Bar-mk)/10)+"px"
+	 				}else{
+	 					clearInterval(T1)
+	 				}
+	 				for(var k = 0;k<navList.length;k++){
+	 					Gbb[k].className = "";
+	 				}
+	 				Gbb[n].className = "spanA";
+	 			},30)
+	 		}	
+	 		else{
+	 			n = navList.length-1
+	 			var T1 = setInterval(function(){
+	 			var mk = parseInt(nav.style.left)
+	 				if(mk !== -(n*1000)){
+	 					nav.style.left = mk-40*(navList.length-1)+"px"
+	 				}else{
+	 					clearInterval(T1)
+	 				}
+	 			},30)
+	 		}
+	 	}
+	 	left.onclick = function(){
+	 		navB()
+	 	}
+	 	var zidong = setInterval(function(){
+	 		navA()
+	 	},3000)
+	 	var Gbb = document.getElementById("dian").getElementsByTagName("span")
+	 	for(var i = 0;i<Gbb.length;i++){
+	 		Gbb[i].onclick = function(){
+	 			for(var k = 0;k<navList.length;k++){
+	 				Gbb[k].className = "";
+	 			}
+	 			n = Number(this.innerHTML)
+	 			Gbb[n].className = "spanA";
+	 			var Nar = -(n*1000)
+				var ml = parseInt(nav.style.left)
+	 			navA()
+	 			navB()
+	 		}
+	 	}
+	 </script>
+</body>
+</html>

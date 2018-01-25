@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>xinlang</title>
+	<style>
+		p span{
+			display: none;
+			color: red;
+		}
+		.shou{
+			display: inline;
+		}
+	</style>
+</head>
+<body>
+	<h1>注册</h1>
+	<p>邮箱：<input type="text" class="youxiang"><span id="span-1">请输入邮箱</span></p>
+	<p>密码：<input type="password" class="mima"><span id="span-2">请输入密码</span></p>
+	<p>官方微博名：<input type="text" class="weibo"><span id="span-3">请输入微博名</span></p>
+	<button id="but">立即注册</button>
+	<script>
+		var youXiang = document.getElementsByClassName('youxiang')[0]
+		var miMa = document.getElementsByClassName('mima')[0]
+		var weiBo = document.getElementsByClassName('weibo')[0]
+		var youSpan = document.getElementById("span-1")
+		var miSpan = document.getElementById("span-2")
+		var weiSpan = document.getElementById("span-3")
+		var but = document.getElementById("but")
+		but.onclick = function(){
+			if(youXiang.value&&miMa.value&&weiBo.value){
+				alert("注册成功")
+				youSpan.className=""
+				miSpan.className=""
+				weiSpan.className=""
+			}
+			else{
+				// alert("注册失败")
+				if(youXiang.value==""){
+					youSpan.className="shou"
+				}
+				if(miMa.value==""){
+					miSpan.className="shou"
+				}
+				if(weiBo.value==""){
+					weiSpan.className="shou"
+				}
+			}
+		}
+	</script>
+</body>
+</html>

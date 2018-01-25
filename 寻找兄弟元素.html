@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>nextSibling</title>
+</head>
+<body>
+	<ul>
+		<li>第一个</li>
+		<li>第二个</li>
+		<li>第三个</li>
+		<li id="nav">第四个</li>
+		<li>第五个</li>
+		<li>第六个</li>
+		<li>第七个</li>
+	</ul>
+	<script>
+		var nav = document.getElementById("nav")
+		// console.log(nav.nextSibling)
+		function nextSid(obj){
+			while(obj.nextSibling.nodeType != 1){
+				var b = obj.nextSibling
+				if(b.nextSibling.nodeType == 1){
+					return b.nextSibling
+				}
+			}
+		}
+		console.log(nextSid(nav))
+	</script>
+</body>
+</html>

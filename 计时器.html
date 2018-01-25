@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jishiqi</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		.nav{overflow: hidden;width: 150px;}
+		.main{width: 15px;float: left;margin-top: 10px;
+			height: 15px;border-radius: 50%;background-color: rgb(128,0,0);}
+		.main:nth-of-type(8){width: 19px;margin-top:8px;height: 19px;border-radius: 50%;}
+	</style>
+</head>
+<body>
+	<div id="nav">
+		<div class="main"></div>
+		<div class="main"></div>
+		<div class="main"></div>
+		<div class="main"></div>
+		<div class="main"></div>
+		<div class="main"></div>
+		<div class="main"></div>
+		<div class="main"></div>
+	</div>
+	<script>
+	var nav = document.getElementById("nav")
+	var n = 0;
+		nav.onclick = function (){
+			setInterval(function(){
+				if(nav.style.marginLeft != "1150px"){
+					nav.style.marginLeft = n+2+"px"
+					n = n+2
+				}
+				if(nav.style.marginLeft =="1150px"){
+					nav.style.marginTop = n+2+"px";
+					n = n+2
+				}
+			},15)
+		}
+		// setInterval(function(){document.write(1)},3000)
+	</script>
+</body>
+</html>

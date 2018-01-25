@@ -3,10 +3,48 @@
 <head>
 	<meta charset="UTF-8">
 	<title>1000以内7的倍数</title>
+	<style>
+		header{
+			width: 500px;
+			border: 1px solid #333;
+			margin: 0 auto;
+		}
+		div{
+			width: 500px;
+			height: 40px;
+			line-height: 40px;
+			font-size: 18px;font-family: "华文新魏";text-align: center;
+			color:blue;
+			
+		}
+		.nav{background-color:rgb(128,0,0);
+			color: #fff;
+		}
+	</style>
 </head>
 <body>
 	<header>
-		
+		<div class="nav">我是一个nav</div>
+		<div>我是一个nav</div>
+		<div>我是一个nav</div>
+		<div>我是一个nav</div>
+		<div>我是一个nav</div>
+		<div>我是一个nav</div>
+		<div>我是一个nav</div>
+		<div>我是一个nav</div>
+		<div>我是一个nav</div>
+		<div>我是一个nav</div>
+		<div>我是一个nav</div>
+		<div>我是一个nav</div>
+		<div>我是一个nav</div>
+		<div>我是一个nav</div>
+		<div>我是一个nav</div>
+		<div>我是一个nav</div>
+		<div>我是一个nav</div>
+		<div>我是一个nav</div>
+		<div>我是一个nav</div>
+		<div>我是一个nav</div>
+		<div>我是一个nav</div>
 	</header>
 	<script>
 		// var a=1;
@@ -111,28 +149,38 @@
 			// 	document.write("第"+(i+1)+"次　　　"+arr+"<br/>"	)
 			// }
 			// console.log(arr)
-			var obj={
-				姓名:"郭博",
-				年龄:13,
-				性别:"男",
-				学历:"大专",
-				出生年月:"2004-12-01",
-				婚姻状况:"未成年"
-			}
-			obj.身高 = "净身高150cm"
-			obj.年龄 = 14
-			obj.爱好 = "热爱学习，喜欢户外运动"
-			delete obj.性别
-			console.log(obj)
-			for(var i in obj){
-				console.log(obj[i])
-			}
-			var Array = ["郭博",13,'自律行不行，是我的缺点']
-			for(var s in Array){
-				console.log(Array[s])
-			}
-			console.log(document.write("<h1 from:red>郭博</h1>"))
+			// var obj={
+			// 	姓名:"郭博",
+			// 	年龄:13,
+			// 	性别:"男",
+			// 	学历:"大专",
+			// 	出生年月:"2004-12-01",
+			// 	婚姻状况:"未成年"
+			// }
+			// obj.身高 = "净身高150cm"
+			// obj.年龄 = 14
+			// obj.爱好 = "热爱学习，喜欢户外运动"
+			// delete obj.性别
+			// console.log(obj)
+			// for(var i in obj){
+			// 	console.log(obj[i])
+			// }
+			// var Array = ["郭博",13,'自律行不行，是我的缺点']
+			// for(var s in Array){
+			// 	console.log(Array[s])
+			// }
+			// console.log(document.write("<h1 from:red>郭博</h1>"))
 			// document.write("<style>h1{color="red";}</style>")
+			// document.innerHTML
+	</script>
+	<script>
+	// var main = document.getElementById('nav')
+	var ktv = document.getElementsByTagName('div')
+		for(var i = 0;i<ktv.length;i++){
+			if(i%2==0){
+				ktv[i].className="nav"
+			}
+		}
 	</script>
 </body>
 </html>

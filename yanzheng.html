@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>yanzheng</title>
+	<style>
+		#wsq{
+			width: 300px;height: 300px;border:1px solid #000;
+		}
+	</style>
+</head>
+<body>
+	<h2>测试</h2>
+	<hr/>
+	用户名： <input type="text" class="inone" value="">
+	<br/>
+	密码： <input type="password" class="intwo">
+	<br/>
+	爱好： 	打篮球<input type="checkbox" class="aihao" value="打网球">
+			打网球<input type="checkbox" class="aihao">
+			打气球<input type="checkbox" class="aihao">
+			打排球<input type="checkbox" class="aihao">
+			打足球<input type="checkbox" class="aihao">
+			打羽毛球<input type="checkbox" class="aihao"><br/>
+	男：<input type="radio" checked id="nan" name="xingbie" value="男">
+	女：<input type="radio" id="nv" name="xingbie" value="女">
+	<select name="" id="select">
+		<option value="西安">西安</option>
+		<option value="渭南">渭南</option>
+		<option value="铜川">铜川</option>
+		<option value="咸阳">咸阳</option>
+		<option value="宝鸡">宝鸡</option>
+		<option value="安康">安康</option>
+	</select><br/>
+	<button id="button">提交</button>
+	<div id="wsq"></div>
+	<p class="ppp"></p>
+	<script>
+		var button = document.getElementById('button')
+		var inone = document.getElementsByClassName('inone')[0]
+		var intwo = document.getElementsByClassName('intwo')[0]
+		var nan = document.getElementById("nan")
+		var nv = document.getElementById("nv")
+		var select = document.getElementById("select")
+		var checked = document.getElementsByClassName("aihao");
+		var div1 = document.getElementById("div1")
+		var p = document.getElementsByClassName("ppp")[0]
+		button.onclick = function(){
+			div1.appendChild(ppp);
+			console.log(inone.value);
+			console.log(intwo.value);
+			if(nan.checked){
+				console.log(nan.value)
+			}else{
+				console.log(nv.value)
+			}
+			console.log(select.value)
+			// console(aihao.value)
+		}
+	</script>
+</body>
+</html>

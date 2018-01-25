@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{margin: 0;padding: 0;}
+		#nav{width: 200px;height: 200px;background-color: #333;}
+	</style>
+</head>
+<body>
+	<div id="nav" style="margin-left:0px;"></div>
+	<script>
+		var nav = document.getElementById("nav")
+		// var ktv = 0 
+		// var bat = 1000;
+		nav.onclick = function(){
+			setInterval(function(){
+				var ml = parseInt(nav.style.marginLeft)
+				if(ml < 500){
+					nav.style.marginLeft = ml+(500-ml)/10+"px"
+				}
+			},30)
+		}
+	</script>
+</body>
+</html>

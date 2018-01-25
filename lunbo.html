@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>lunbo</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		li{list-style: none;}
+		header{
+			width: 1000px;
+			margin: 0 auto;
+			position: relative;
+		}
+		ul{
+			margin-top: 100px;
+		}
+		.main li{
+			display: none;
+		}
+		.main .lione{
+			display: block;
+		}
+		#left,#right{
+			position: absolute;
+			top: 45%;
+			transition:all .5s;
+			cursor: pointer;
+			opacity: .7;
+		}
+		#left:hover,#right:hover{
+			transform:scale(1.2) ;
+			opacity: 1;
+		}
+		#left{
+			left: 20px;
+		}
+		#right{
+			right: 20px;
+		}
+		.nav{overflow: hidden;position: absolute;bottom: 20px;left: 40%;}
+		span{display: block;float: left;width: 18px;height: 18px;border-radius: 50%;
+			margin-left: 10px;background-color: #fff;cursor: pointer;color: transparent;
+		}
+		.nav-span{background-color: rgb(128,0,0);}
+	</style>
+</head>
+<body>
+	<header>
+		<ul class="main">
+			<li class="lione"><img src="img/1.jpg" alt=""></li>
+			<li><img src="img/2.jpg" alt=""></li>
+			<li><img src="img/3.jpg" alt=""></li>
+			<li><img src="img/4.jpg" alt=""></li>
+			<li><img src="img/5.jpg" alt=""></li>
+			<li><img src="img/6.jpg" alt=""></li>
+		</ul>
+		<img src="img/l.png" alt="" id="left">
+		<img src="img/r.png" alt="" id="right">
+		<div class="nav">
+			<span class="nav-span">0</span>
+			<span>1</span>
+			<span>2</span>
+			<span>3</span>
+			<span>4</span>
+			<span>5</span>
+		</div>
+	</header>	
+	<script>
+		var liLise = document.getElementsByTagName('li')
+		var pove = document.getElementById('right')
+		var ktv = document.getElementById('left')
+		var span = document.getElementsByTagName("span")
+		var b = 0;
+		var l = 0;
+		pove.onclick = function(){
+			for(var i=0;i<liLise.length;i++){
+				liLise[i].className="";
+				span[i].className="";
+			}
+			if(b<liLise.length-1){
+				b++;
+			}
+			else{
+				b=0;
+			}
+				liLise[b].className = "lione";
+				span[b].className = "nav-span"
+		}
+		ktv.onclick = function(){
+			for(var i=0;i<liLise.length;i++){
+				liLise[i].className="";
+				span[i].className="";
+			}
+			if(b!=0){
+				b--;
+			}else{
+				b = liLise.length-1;
+			}
+			liLise[b].className="lione"
+			span[b].className = "nav-span"
+		}
+		for(var i=0;i<span.length;i++){
+			span[i].onclick = function(){
+				b=Number(this.innerHTML)
+				for(var k=0;k<liLise.length;k++){
+					liLise[k].className="";
+					span[k].className="";
+				}
+				span[b].className="nav-span";
+				liLise[b].className="lione"
+			}
+		}
+	</script>
+	// <script>
+	// 	var lione = document.getElementsByTagName("li")
+	// 	var right = document.getElementById("right")
+	// 	var n = 0;
+	// 	right.onclick = function(){
+	// 		if(n<lione.length-1){
+				
+	// 		}else{
+
+	// 		}
+	// 	}
+	</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<ul>
+		<li>第一个</li>
+		<li>第二个</li>
+		<li>第三个</li>
+		<li class="main">第四个</li>
+		<li>第五个</li>
+		<li>第六个</li>
+		<li>第七个</li>
+		<li>第八个</li>
+		<li>第八个</li>
+		<li>第八个</li>
+		<li>第八个</li>
+		<li>第八个</li>
+	</ul>
+	<script>
+		var main = document.getElementsByClassName("main")[0]
+		var arrAy = []
+		function navLi(obj){
+			var n = obj.parentNode.childNodes;
+			for(var i = 0;i<n.length;i++){
+				// console.log(l[i])
+				if(n[i].className=="main"){
+					// console.log(n[i])
+					for(var u=i+1;u<n.length;u++){
+						// console.log(n[u])
+						if(n[u].nodeType==1){
+							// console.log(n[u])
+							arrAy.push(n[u]) 
+						}
+					}
+				}
+			}
+			return arrAy
+		}
+		console.log(navLi(main))
+	</script>
+</body>
+</html>

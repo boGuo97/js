@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		header{width: 100%;height: 100%;overflow: hidden;}
+		#nav{width: 300px;height: 100%;background-color: #000;position:absolute;left: -300px;top: 0;}
+		.main{padding-left: 300px;}
+		#button{width: 100px;height: 30px;background-color: pink;border:1px solid #dd2014;color: #fff;outline: none;}
+		#zhao{opacity: 0;background-color: #333;position: absolute;top: 0;left: 0;z-index: -1;width: 100%;height: 100%;}
+	</style>
+</head>
+<body>
+	<header>
+		<div id="nav" style="left:-300px;"></div>
+		<div class="main">
+			<button id="button">出阿里</button>
+		</div>	
+		<div id="zhao"></div>
+	</header>
+	<script>
+		var nav = document.getElementById('nav')
+		var	but = document.getElementById("button")
+		var zhao = document.getElementById("zhao")
+		but.onclick = function(){
+			var n = -300;
+			var t1 = setInterval(function(){
+				if(parseInt(nav.style.left) < 0){
+					nav.style.left = n+20+"px"
+					n = n+20
+					zhao.style.opacity = .1;
+				}else{
+					clearInterval(t1)
+				}
+			},20)
+		}
+		nav.onclick = function(){
+			// var i = 0;console
+			// console.log(parseInt(nav.style.left))
+			var t2 = setInterval(function(){
+				if(parseInt(nav.style.left) > -300){
+					nav.style.left = parseInt(nav.style.left)-20+"px"
+					zhao.style.opacity = 0;
+				}else{
+					clearInterval(t2)
+				}
+			},20)
+		}
+	</script>
+</body>
+</html>

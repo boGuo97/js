@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.div1{
+			width: 50px;
+			height: 50px;
+			background-color: pink;
+			margin: 10px 10px;
+			/*border-radius: 50%;*/
+			float: left;
+			line-height: 50px;
+			text-align: center;
+		}
+		.div2{
+			width: 50px;
+			height: 50px;
+			background-color: yellow;
+			margin: 10px 10px;
+			/*border-radius: 50%;*/
+			float: left;
+			line-height: 50px;
+			text-align: center;
+		}
+		.blue{
+			width: 500px;
+			height: 200px;
+			background-color: blue;
+			margin: 0 auto;
+		}
+	</style>
+</head>
+<body>
+	<div class="div1">1</div>
+	<div class="div1">2</div>
+	<div class="div1">3</div>
+	<div class="div1">4</div>
+	<div class="div1">5</div>
+	<div class="div1">6</div>
+	<div class="div1">7</div>
+	<div class="div1">8</div>
+	<div class="div1">9</div>
+	<script>
+		var nav = document.getElementsByClassName('div1');
+		var b= 0;
+		for(var i = 0;i<nav.length;i++){
+			nav[i].onclick = function () {
+				console.log(this.innerHTML);
+			}
+		}
+	</script>
+</body>
+</html>

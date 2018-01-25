@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin: 0;padding: 0px;}
+		#nav{overflow: hidden;width: 100%;}
+		#nav li{
+			list-style: none;float: left;width: 10%;height: 40px;
+			/*background-color: #000;*/line-height: 40px;text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<ul id="nav">
+		<li>郭博</li>
+		<li>孙文瑞</li>
+		<li>马涛</li>
+		<li>黄祥</li>
+		<li>黄岩</li>
+		<li>刘林涛</li>
+		<li>袁鹏</li>
+		<li>秦明杰</li>
+		<li>王大伟</li>
+		<li>王喜林</li>
+	</ul>
+	<script>
+		// console.log(navLi)
+		function navList(){
+				var but = "#";
+				var arr = [0,1,2,3,4,5,6,7,8,9,"A",'B','C','D','E','F']
+				for(var i = 0; i<6;i++){
+					var main = Math.floor(Math.random()*16);
+						but=but+arr[main]
+				}
+					return but
+			}	
+		var mainLi = document.getElementById("nav").getElementsByTagName("li")
+		setInterval(function(){
+			for(var n = 0; n<mainLi.length;n++){
+				mainLi[n].style.backgroundColor = navList()
+				mainLi[n].style.color = navList()
+			}
+		},100)
+	</script>
+</body>
+</html>

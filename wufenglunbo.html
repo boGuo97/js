@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>wufeng</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		header{width: 1000px;position: relative;margin:0 auto;overflow: hidden;margin-top: 100px;}
+		ul{width: 6000px;position: relative;left: 0;}
+		ul:after{
+			content: "";
+			display: block;
+			clear: both;
+		}
+		li{list-style: none;float: left;width: 1000px;}
+		#left,#right{
+			position: absolute;top: 45%;cursor: pointer;transition:all .5s;
+			z-index: 999;
+		}
+		#left:hover,#right:hover{transform:scale(1.2) }
+		#left{left: 20px;}
+		#right{right: 20px;}
+		#dian{position: absolute;bottom: 15px;overflow: hidden;left: 40%;}
+		#dian span{display: block;width: 15px;height: 15px;border-radius: 50%;
+			background-color: rgb(255,255,255);float: left;margin-left: 10px;
+			font-size: 0;cursor: pointer;
+		}
+		#dian .spanA{background-color: rgb(128,0,0)}
+		/*#zhaozi{position: absolute;top: 0;background-color: #fff;width: 1000px;
+				height: 413px;opacity: .5;
+		}*/
+	</style>
+</head>
+<body>
+	<header id="wrap">
+		 <ul id="nav" style="left:0;">
+		 	<li><img src="img/1.jpg" alt=""></li>
+		 	<li><img src="img/2.jpg" alt=""></li>
+		 	<li><img src="img/3.jpg" alt=""></li>
+		 	<li><img src="img/4.jpg" alt=""></li>
+		 	<li><img src="img/5.jpg" alt=""></li>
+		 	<li><img src="img/6.jpg" alt=""></li>
+		 </ul>
+		 <img src="img/l.png" alt="" id="left">
+		 <img src="img/r.png" alt="" id="right">
+		 <div id="dian">
+		 	<span class="spanA">0</span>
+		 	<span>1</span>
+		 	<span>2</span>
+		 	<span>3</span>
+		 	<span>4</span>
+		 	<span>5</span>
+		 </div>
+		 <div id="zhaozi"></div>
+	 </header>
+	 <script>
+	 	var left = document.getElementById("left")
+	 	var right = document.getElementById("right")
+	 	var nav = document.getElementById("nav")
+	 	var NavLi = nav.getElementsByTagName('li');
+	 	var dian = document.getElementById("dian")
+	 	var spanList = dian.getElementsByTagName("span")
+	 	var Htv = document.getElementById("zhaozi")
+	 	var n = 0;
+	 	function navA(){
+	 		n++;
+	 		if(n<NavLi.length){
+	 			var T1 = setInterval(function(){
+	 				var b = parseInt(nav.style.left);
+	 				if(b !== -(n*1000)){
+	 					nav.style.left = b-40+"px"
+	 					Htv.style.opacity = 0;
+	 				}else{		
+	 					clearInterval(T1)
+	 				}
+	 			},30)
+	 		}
+	 		else{
+	 			n = 0;
+	 			var T1 = setInterval(function(){
+	 				var b = parseInt(nav.style.left);
+	 				if(b !== -(n*1000)){
+	 					nav.style.left = b+40*(NavLi.length-1)+"px"
+	 					// b = b+20;
+	 				}else{
+	 					clearInterval(T1)
+	 				}
+	 			},30)
+	 		}
+	 	}
+	 	right.onclick = function(){
+	 		navA()
+	 	}
+	 	function navB(){
+	 		n--
+	 		// console.log(n)
+	 		if(n !== -1){
+	 			var T1 = setInterval(function(){
+	 			var mk = parseInt(nav.style.left)
+	 				if(mk !== -(n*1000)){
+	 					nav.style.left = mk+40+"px"
+	 				}else{
+	 					clearInterval(T1)
+	 				}
+	 			},30)
+	 		}	
+	 		else{
+	 			n = NavLi.length-1
+	 			var T1 = setInterval(function(){
+	 			var mk = parseInt(nav.style.left)
+	 				if(mk !== -(n*1000)){
+	 					nav.style.left = mk-40*(NavLi.length-1)+"px"
+	 				}else{
+	 					clearInterval(T1)
+	 				}
+	 			},30)
+	 		}
+	 	}
+	 	left.onclick = function(){
+	 		navB()
+
+	 	}
+	 	wrap.onmouseenter = function(){
+	 		clearInterval(zidong)
+	 	}
+	 	var zidong = setInterval(function(){
+	 		navA()
+	 	},2000)
+	 	// wrap.onmouseleave = function(){
+	 	// 	navA()
+	 	// }
+	 	for(var i = 0;i<spanList.length;i++){
+	 		// console.log(spanList[i])
+	 		spanList[i].onmouseenter = function(){
+	 			// spanList[i].className = "";
+	 			for(var b = 0;b<NavLi.length;b++){
+	 				spanList[b].className = "";
+	 			}
+	 			var p = Number(this.innerHTML)
+	 			spanList[p].className = "spanA";
+	 			nav.style.left = -(p*1000)+"px";
+	 			// NavLi[n].style.left = n*(1000)+"px"
+	 			// console.log(p)
+	 		}
+	 	}
+	 </script>
+</body>
+</html>
