@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		.nav{
+			width: 224px;
+			height: 337px;
+			background-image: url(img/yi.jpg);
+			margin: 0px auto;
+			margin-top: 100px;
+    		padding-top: 60px;
+			position: relative;
+			background-repeat: no-repeat;
+		}
+		h2{
+    		height: 36px;
+   			font-size: 28px;
+   			line-height: 36px;
+   			margin-bottom: 11px;
+   			color: #615548;
+  		  	text-align: center;
+		}
+		p{
+			margin-bottom: 18px;
+    		font-size: 18px;
+    		color: #615548;
+    		line-height: 22px;
+    		height: 22px;
+    		text-align: center;
+		}
+		.kbh{
+   			width: 20px;
+   			height: 2px;
+   			margin: 0 auto 18px;
+   			background: #61594b;
+   			font-size: 12px;
+   			text-align: center;
+			width: 40px;
+   		}
+		.main{
+		    height: 40px;
+   			margin-bottom: 50px;
+   			text-align: center;
+		}
+		span{display: inline-block;}
+		.ktv{
+    		color: #fff;
+    		width: 40px;
+    		font-size: 18px;
+    		line-height: 40px;
+    		background-color: #fff;
+    		border-radius: 2px;
+		}
+		.nb{
+			width: 110px;
+   			height: 30px;
+   			margin: 0 auto;
+   			line-height: 30px;
+   			color: #fff;
+   			font-size: 14px;
+   			background-color: #a7936e;
+   			cursor: pointer;
+   			text-align: center;
+   			border-radius: 15px;
+		}
+		.nb:hover{
+			color: gold;
+		}
+		.BBT{
+			width: 433px;
+			height: 189px;
+			border: 1px solid #a7936e;
+			margin: 0 auto;	
+			font-size: 12px;
+		}
+		.Hn{width: 152px;height: 10px;border-radius: 5px;float: left;border: 1px solid #000;}
+		.BH{float: left;width: 180px;}
+		.BL{padding-left:180px;margin-top: 50px;}
+		.tiao{width: 152px;height: 10px;background-color: pink;border-radius: 5px;}
+		.BBT span{padding-left: 15px;margin-bottom: -5px;}
+	</style>
+</head>
+<body>
+	<div class="nav">
+		<h2>18点场</h2>
+		<p>距离结束还剩</p>
+		<div class="kbh"></div>
+		<div class="main">
+			<span class="ktv" id="span1">1</span>
+			<span>:</span>
+			<span class="ktv" id="span2">1</span>
+			<span>:</span>
+			<span class="ktv" id="span3">1</span>
+		</div>
+		<div class="nb">查看全部 ♛</div>
+	</div>
+	<div class="BBT">
+		<div class="BH"><img src="img/7.jpg" alt=""></div>
+		<div class="BL">
+			<div class="Hn"><div class="tiao" id="BT"></div></div>
+			<span>还剩<span id="BU">152</span>件</span>
+
+		</div>
+	</div>
+	<script>
+		var span1 = document.getElementById("span1");
+		var span2 = document.getElementById("span2");
+		var span3 = document.getElementById("span3");
+		function guobo(){
+			var nowlist = new Date();
+			var datelist = new Date();
+			var tian = datelist.setDate(30);
+			var yue = datelist.setMonth(0);
+			var shi = datelist.setHours(12);
+			var fen = datelist.setMinutes(0);
+			var miao = datelist.setSeconds(0);
+			// console.log(nowlist);
+			// console.log(datelist);
+			var s = (datelist - nowlist)/1000;
+			var n = Math.floor(s/3600)
+			// var HB = s/3600
+			var main = s-(n*3600)
+			var h = Math.floor(main/60)
+			// var HC = main/60
+			var mbin = main-(h*60)
+			span1.innerHTML = n
+			span2.innerHTML = h
+			span3.innerHTML = mbin
+			if(mbin<10){
+				span3.innerHTML = "0" + mbin
+			}
+			if(n<10){
+				span1.innerHTML = "0" + n
+			}
+		}
+		guobo()	
+		function navList(){
+				var but = "#";
+				var arr = [0,1,2,3,4,5,6,7,8,9,"A",'B','C','D','E','F']
+				for(var i = 0; i<6;i++){
+					var main = Math.floor(Math.random()*16);
+						but=but+arr[main]
+				}
+					return but
+			}	
+		setInterval(function(){
+			guobo()	
+			span1.style.color = navList()
+			span2.style.color = navList()
+			span3.style.color = navList()
+		},1000)
+		var BU = document.getElementById("BU");
+		var BT = document.getElementById("BT");
+		var m = 152;
+		setInterval(function(){
+			if(BU.innerHTML == 152){
+				BU.innerHTML = m - 1
+				m = m-1
+				BT.style.width = m-1+"px"
+				m = m-1
+			}
+			else{
+				BU.innerHTML = m - 1
+				m = m-1
+				BT.style.width = m-1+"px"
+				m = m-1
+			}
+			if(BU.innerHTML == 0){
+				BU.innerHTML = 0;
+			}
+		},2000)
+	</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>贪吃蛇</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		#wrap{
+			width: 500px;
+			height: 500px;
+			border:1px solid #000;
+			margin: 50px auto;
+			position: relative;
+			overflow: hidden;
+		}
+		.snakeBody{
+			width: 19px;
+			height: 19px;
+			border-radius: 10%;
+			background-color:#DB3E3E;
+			position: absolute;
+			float: left;
+			border-right:1px solid #fff; 
+			border-radius: 5px;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap"></div>
+	<script>
+		var wrap = document.getElementById("wrap");
+		var initLength = 5;  // 初始蛇的长度。
+		var snake = [];
+		var speed = 150;
+		var dir = "rigth";  // 默认小蛇移动方向为右................
+		//miniSnake ：小蛇。   初始化一条蛇。
+		function miniSnake(){
+			for(var i = 0;i < initLength;i++){
+				// 创建一个div.......
+				var snakeBody = document.createElement("div")
+				// 给新创建的div附一个class名......
+				snakeBody.className = "snakeBody"
+				// 插入到父元素.........
+				wrap.appendChild(snakeBody)
+				// 设置初始化的蛇的left值，让其不堆叠.........
+				snakeBody.style.left = (20 * i)+"px";
+				// 设置top值  让其紧贴wrap顶部.....
+				snakeBody.style.top = "0px";
+				snake.push(snakeBody);
+			}
+		}
+
+		  // movement :  移动.......
+		function movement(){
+			//获取蛇头的位置...........................
+			LEFT = parseInt(snake[snake.length - 1].style.left);
+			TOP = parseInt(snake[snake.length - 1].style.top);
+			//把当前的蛇尾插入到蛇头.........................
+			snake.push(arr[0]);
+			snake.shift();
+			// ...........................................
+			if(dir == "rigth"){
+				snake[snake.length-1].style.left = LEFT + 20 + "px";  
+				snake[snake.length-1].style.left = TOP + "px";  
+			}
+			if(dir == "left"){
+				snake[snake.length-1].style.left = LEFT - 20 + "px";  
+				snake[snake.length-1].style.left = TOP + 20 + "px";  
+			}
+			if(dir == "top"){
+				snake[snake.length-1].style.left = LEFT + "px";  
+				snake[snake.length-1].style.left = TOP - 20 + "px";  
+			}
+			if(dir == "bottom"){
+				snake[snake.length-1].style.left = LEFT + "px";  
+				snake[snake.length-1].style.left = TOP + 20 + "px";  
+			}
+
+		}
+		window.onkeydown = function(event){
+			if(event.keyCode == 40 && dir !== "top"){
+				dir = "bottom"
+			}
+			if(event.keyCode == 39 && dir !== "left"){
+	        	dir = "right"
+	       	}
+	       	if(event.keyCode == 37 && dir !== "right"){
+	         	dir = "left"
+	       	}
+	       	if(event.keyCode == 38 && dir !== "bottom"){
+	       		dir = "top"
+	       	}
+		}
+
+		movement()
+		// ..........小蛇身体颜色.....................................
+		function color(){
+			var but = "#";
+			var arr = [0,1,2,3,4,5,6,7,8,9,"A","B",'C','D','E','F']
+			for(var n = 0;n < 6;n++){
+				var main = Math.floor(Math.random()*16);
+				but=but+arr[main]
+			}
+				return but
+		}
+		var DivList = document.getElementsByClassName("snake")
+		setInterval(function(){
+			for(var i = 0;i < DivList.length;i++){
+				DivList[i].style.backgroundColor = color()
+				DivList[i].style.color = color()
+			}
+		},300)
+
+
+
+		// ...生成一条蛇.....................................................
+		miniSnake()
+		setInterval(function(){
+        	movement()
+     	},speed)
+	</script>
+</body>
+</html>

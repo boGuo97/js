@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h2 id = "nav" style="color:red;
+	"></h2>
+	<script>
+		var nav = document.getElementById("nav")
+		var arr = ["日","一","二","三","四","五","六"]
+		function guo(){
+			var date = new Date()
+			var ri = date.getDate()
+			var day = date.getDay()
+			var year = date.getFullYear()
+			var yue = date.getMonth() + 1
+			var xiaoshi = date.getHours()
+			var fenzhong = date.getMinutes()
+			var miao = date.getSeconds()
+			for(var i = 0; i < arr.length; i++){
+				day = arr[date.getDay()]
+			}
+			nav.innerHTML = year + "年" + yue + "月" + ri + "日" + xiaoshi + ":" + fenzhong + ":" + miao + "周" + day
+			if(miao<10){
+				nav.innerHTML = year + "年" + yue + "月" + ri + "日" + xiaoshi + ":" + fenzhong + ":" + "0" + miao + "周" + day
+			}
+			if(yue<10){
+				// nav.innerHTML = year + "年" + "0"+yue + "月" + ri + "日" + xiaoshi + ":" + fenzhong + ":" + "0" + miao + "周" + day
+			}
+			// var n = String(day)
+		}
+		setInterval(function(){
+			guo()	
+		},1000)
+		guo()
+	</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin: 0;padding: 0;}
+		#nav{height: 70px;background-color:#f9f9f9;text-align: center;line-height: 70px;font-family: "华文新魏";font-size: 68px;color: #fff;border-bottom: 2px solid #ddd;
+			box-shadow: 0 0 5px #777;margin:left;
+	}
+		#span1{
+			display: inline-block;
+			width: 70
+
+			px;
+			height: 70px;
+			background-color: #000;
+		}
+	</style>
+</head>
+<body>
+	<div id="nav">
+		<span id="span1"></span>
+		<span id="span2"></span>
+		<span id="span3"></span>
+	</div>
+
+	<script>
+		var nav = document.getElementById("nav")	
+		var span1 = document.getElementById("span1")
+		var span2 = document.getElementById("span2")
+		var span3 = document.getElementById("span3")
+		// console.log(main)
+		// var speed = 0;
+		function guobo(){
+			var nowlist = new Date()
+			var datelist = new Date();
+			var tian = datelist.setDate(3)
+			var yue = datelist.setMonth(1)
+			var shi = datelist.setHours(0)
+			var fen = datelist.setMinutes(0)
+			var miao = datelist.setSeconds(0)
+			var s = (datelist - nowlist)/1000
+			var n = Math.floor(s/86400)
+			var main = s-(n*86400)
+			var h = Math.floor(main/3600)
+			var mbin = main-(h*3600)
+			var fenzhong = Math.floor(mbin/60)
+			var mcin = mbin-(fenzhong * 60)
+			span1.innerHTML = h
+			nav.innerHTML = n +"天" + span1.innerHTML  + ":" + fenzhong + ":" + mcin
+			if(mcin<10){
+				nav.innerHTML = n +"天" + span1.innerHTML  + ":" + fenzhong + ":" + "0" + mcin	
+			}
+		}
+		function navList(){
+				var but = "#";
+				var arr = [0,1,2,3,4,5,6,7,8,9,"A",'B','C','D','E','F']
+				for(var i = 0; i<6;i++){
+					var main = Math.floor(Math.random()*16);
+						but=but+arr[main]
+				}
+					return but
+			}	
+		setInterval(function(){
+			guobo()	
+			nav.style.color = navList()
+			var ml = parseInt(nav.style.marginTop) 
+		},1000)
+		guobo()
+	</script>
+</body>
+</html>

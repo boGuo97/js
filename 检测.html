@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#text{width: 500px;height: 200px;}
+		#nav{display: black;width: 500px;height: 100px;background-color: pink;}
+		.yellow{color: yellow;}
+		.red{background-color: green;}
+	</style>
+</head>
+<body>
+	<textarea id="text"></textarea>
+	<button id = "but" >开始检测</button>
+	<span id= "nav" ></span>
+	<p id = "up"></p>
+	<script>
+		var text = document.getElementById("text")
+		var but = document.getElementById("but")
+		var nav = document.getElementById("nav")
+		var up = document.getElementById("up")
+		var arr = ["郭博","天安门","54","毛主席","中南海","大表哥"]
+		but.onclick = function(){
+			var bool = false;
+			var yu = text.value
+			up.innerHTML = yu
+			for(var n = 0;n < arr.length;n++){
+				if(text.value.indexOf(arr[n]) !== -1){
+					bool = true;
+					up.innerHTML = up.innerHTML.replace(arr[n],"<span class='red'>"+ arr[n] +" </span>")
+				}
+			}
+			if(bool){
+				nav.innerHTML = "您输入的词汇有敏感词"
+				nav.className = "red"
+			}
+			else{
+				nav.innerHTML = "通过"
+				up.innerHTML = "";
+			}
+		}
+		
+	</script>
+</body>
+</html>

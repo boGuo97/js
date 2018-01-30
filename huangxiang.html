@@ -1,0 +1,23 @@
+	<script>
+		var box = document.getElementById('box')
+		var date = new Date()
+		console.log(date)
+		var timeDate = new Date()
+		var jzy = timeDate.setMonth(1)
+		var jzt = timeDate.setDate(3)
+		var jzs = timeDate.setHours(0)
+		var jzf = timeDate.setMinutes(0)
+		var jzm = timeDate.setSeconds(0)
+		console.log(timeDate)
+		console.log(timeDate-date)
+
+		var zongMiao = (timeDate-date)/1000
+		var tian = Math.floor(zongMiao/(60*60*24))
+		var shi = Math.floor((zongMiao-(tian*24*60*60))/(60*60))
+		var fen  = Math.floor((zongMiao - (tian*24*60*60) - (shi*60*60))/60)
+		var s = zongMiao - (tian*24*60*60) - (shi*	60*60)-(fen*60)
+		console.log(tian)
+		console.log(shi)
+		console.log(fen)
+		console.log(s)
+	</script>

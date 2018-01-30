@@ -122,9 +122,9 @@
 	 	left.onclick = function(){
 	 		navB()
 	 	}
-	 	var zidong = setInterval(function(){
-	 		navA()
-	 	},3000)
+	 	// var zidong = setInterval(function(){
+	 	// 	navA()
+	 	// },3000)
 	 	var Gbb = document.getElementById("dian").getElementsByTagName("span")
 	 	for(var i = 0;i<Gbb.length;i++){
 	 		Gbb[i].onclick = function(){
@@ -133,12 +133,18 @@
 	 			}
 	 			n = Number(this.innerHTML)
 	 			Gbb[n].className = "spanA";
-	 			var Nar = -(n*1000)
-				var ml = parseInt(nav.style.left)
-	 			navA()
-	 			navB()
+	 			var T1 = setInterval(function(){    //写入一个计时器
+	 				var Nar = -(n*1000)
+					var ml = parseInt(nav.style.left)//把获取的值强制转换为Number类型
+	 					if(ml !== Nar){   //判断ml !== 时执行下一步
+	 						nav.style.left = ml + Math.floor((Nar-ml)/10)+"px"
+	 					}
+	 					else{
+	 						clearInterval(T1)
+	 					}
+	 			},30)
 	 		}
 	 	}
 	 </script>
 </body>
-</html>
+</html>	
