@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="nav">
+		<p>1</p>
+		<p>2</p>
+		<p>3</p>
+		<p>4</p>
+	</div>
+	<div id="main"></div>
+	<ul>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+	</ul>
+	<script>
+	//  varname ：调用变量名  goto ：标签名
+		function varname(goto){
+			var ser = goto.slice(1)
+			if(goto[0] == "#"){
+				return document.getElementById(ser)
+			}
+			if(goto[0] == "."){
+				return document.getElementsByClassName(ser)
+			}
+			if(goto[0] !== "#" && goto[0] !== "."){
+				return document.getElementsByTagName(goto)
+			}
+		}
+		// varname("li")
+		var liList = document.getElementById("nav").getElementsByTagName("p")
+		//eventName   事件名
+		function bindEvent(list,eventName,fn){
+			   // 设置默认值 
+			// if(arguments.length == 2){
+			// 	fn = arguments[1]
+			// 	eventName = "onclick"
+			// }
+			if(arguments.length ==3){
+				for(var i = 0;i < arguments.length; i++){
+					if(typeof arguments[i] == "string"){
+						var a = arguments[i]					
+						// console.log(a)
+					}
+					if(typeof arguments[i]  == "object"){
+						var b = arguments[i]
+						// console.log(b)
+					}	
+					if(typeof arguments[i] == "function"){
+						var c = arguments[i]
+						// console.log(c)
+					}
+				}
+			}
+	   		for(var n = 0 ;n < b.length;n++){
+				b[n][a] = c
+			}
+		}
+		bindEvent(liList,function(){
+			console.log(41)
+		},"onclick")
+	</script>
+</body>
+</html>

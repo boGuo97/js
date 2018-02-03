@@ -5,119 +5,424 @@
 	<title>贪吃蛇</title>
 	<style>
 		*{margin: 0;padding: 0;}
-		#wrap{
-			width: 500px;
-			height: 500px;
-			border:1px solid #000;
-			margin: 50px auto;
+		body{
+
+			background-image: url(img/timg13.gif);
+			background-size: 100%;
+		}
+		header{
+			width: 1200px;
+			margin: 0 auto;
 			position: relative;
-			overflow: hidden;
+			padding-top:100px;	 
+			height: 500px;
+		}
+		#wrap{
+			width: 800px;
+			height: 500px;
+			/*border:1px solid #000;*/
+			/*box-shadow: 5px 5px 5px #000;*/
+			margin: 50px auto;
+			position: absolute;
+			left: 30%;
+			top: 20px;
+			/*overflow: hidden;*/
+			background-image: url(img/timg5.gif);
+			background-repeat: no-repeat;
+			background-size: 100%;
 		}
 		.snakeBody{
-			width: 19px;
-			height: 19px;
+			width: 20px;
+			height: 20px;
 			border-radius: 10%;
 			background-color:#DB3E3E;
 			position: absolute;
 			float: left;
-			border-right:1px solid #fff; 
 			border-radius: 5px;
+		}
+		#wrap span{
+			width: 20px;
+			height: 20px;
+			border-radius: 50%;
+			background-color: #DB0075;
+			display: block;
+			position: absolute;
+		}
+		#jifen{
+			background-color:rgb(128,0,0);margin-left: 80px;
+			font-size: 24px;font-weight: bolder;color: #333;width: 200px;padding: 20px 0;
+			color: #fff;padding-left: 10px;border-radius: 10px;font-family: "华文新魏"
+		}
+		#dev{
+			width: 50px;height: 30px;color: #fff;position: relative;left: -30px;top: 3px;
+			display:inline-block;font-size: 28px;line-height: 28px;
+			border-radius: 10px;text-align: center;margin-left: 30px;transition:all .3s;
+		}
+		#dev.dong{
+			top:-33px;left:-30px;opacity: 0;transition:all .3s;
+		}
+		#kai{
+			background-image: url(img/anniu.png);width: 100px;height: 100px;
+			background-size: 100%;cursor: pointer;margin: 20px 20px;margin-left: 140px;
+		}
+		#zan,#shi{width: 100px;height: 30px;position: absolute;top: 300px;left: 140px;
+			background-color: rgb(128,0,0);color:#fff;text-align: center;line-height: 30px;
+			cursor: pointer;border-radius: 5px;box-shadow: 0 5px 5px #333;
+		}
+		#over{width: 390px;height: 300px;position: absolute;left: 46%;top:170px;
+			background-image: url(img/timg9.gif);background-size: 100%;
+			background-color: #ddd;display: none;
+		}
+		#jiazai a{width: 100px;height: 50px;display: block;background-color: #333;
+			text-align: center;line-height: 50px;color: #fff;margin: 0px auto;
+			margin-top: 230px;cursor: pointer;text-decoration: none;}
+		#sele{width: 103px;height: 30px;margin-top: 60px;margin-left: 140px;
+				padding-left: 10px;border: 1px solid #888;background-color:rgba(128,0,0,.1);
+				outline: none;
 		}
 	</style>
 </head>
 <body>
-	<div id="wrap"></div>
+	<header>
+		<div id="wrap"></div>
+		<div id="jifen">计分器 : <span id = "dev">0</span></div>
+		<div id="kai"></div>
+		<div id="shi">继续</div>
+		<div id="zan">暂停</div>
+		<div id="over"><span id= "jiazai"><a href="">重新开始</a></span></div>
+		<select name="" id="sele">
+			<option value="上帝模式">上帝模式</option>
+			<option value="大师">大师</option>
+			<option value="简单">简单</option>
+			<option value="普通">普通</option>
+		</select>
+		<audio src="beiyin.mp3" id = "micse" loop="true"></audio>
+		<audio src="1.mp3" id = "chi"></audio>
+	</header>
 	<script>
 		var wrap = document.getElementById("wrap");
-		var initLength = 5;  // 初始蛇的长度。
+		var initLength = 3;  // 初始蛇的长度。
 		var snake = [];
 		var speed = 150;
+		var width = 20;
 		var dir = "rigth";  // 默认小蛇移动方向为右................
-		//miniSnake ：小蛇。   初始化一条蛇。
-		function miniSnake(){
-			for(var i = 0;i < initLength;i++){
+		//miniSnake ：小蛇。   初始化一截蛇。
+		var autoFloat = false;
+		var dev = document.getElementById("dev")
+		var K = 0;
+		var HN = document.getElementById("kai")
+		var HU = document.getElementById("zan")
+		var HY = document.getElementById("shi")
+		var over = document.getElementById("over")
+		var sele = document.getElementById("sele")
+		var micse = document.getElementById("micse")
+		var chi = document.getElementById("chi")
+		var GodMode = "Godmode"
+		var B = 0;
+		function miniSnake(Si){
 				// 创建一个div.......
-				var snakeBody = document.createElement("div")
+				var snakeBody = document.createElement("div");
 				// 给新创建的div附一个class名......
-				snakeBody.className = "snakeBody"
+				snakeBody.className = "snakeBody";
 				// 插入到父元素.........
-				wrap.appendChild(snakeBody)
-				// 设置初始化的蛇的left值，让其不堆叠.........
-				snakeBody.style.left = (20 * i)+"px";
-				// 设置top值  让其紧贴wrap顶部.....
-				snakeBody.style.top = "0px";
+				wrap.appendChild(snakeBody);
+				//插入数组
 				snake.push(snakeBody);
-			}
+				// 设置初始化的蛇的left值，让其不堆叠.........
+				snakeBody.style.left = Si.x +"px";
+				// 设置top值  让其紧贴wrap顶部.....
+				snakeBody.style.top = Si.y+"px";
 		}
-
-		  // movement :  移动.......
-		function movement(){
-			//获取蛇头的位置...........................
-			LEFT = parseInt(snake[snake.length - 1].style.left);
-			TOP = parseInt(snake[snake.length - 1].style.top);
-			//把当前的蛇尾插入到蛇头.........................
-			snake.push(arr[0]);
-			snake.shift();
-			// ...........................................
+		//copy : 复制   意思：循环出3节身体
+		function copy(){
+			for(var i = 0;i < initLength;i++){
+				miniSnake({x:(i * width),y:0});
+			};
+		};
+		copy();
+		// 移动蛇
+		function move(){
+			LeFT = parseInt(snake[snake.length-1].style.left);
+			ToP = parseInt(snake[snake.length-1].style.top);
 			if(dir == "rigth"){
-				snake[snake.length-1].style.left = LEFT + 20 + "px";  
-				snake[snake.length-1].style.left = TOP + "px";  
-			}
+				snake[0].style.left = LeFT + width + "px";
+				snake[0].style.top = ToP + "px";
+			};
 			if(dir == "left"){
-				snake[snake.length-1].style.left = LEFT - 20 + "px";  
-				snake[snake.length-1].style.left = TOP + 20 + "px";  
-			}
+				snake[0].style.left = LeFT - width + "px";
+				snake[0].style.top = ToP + "px";
+			};
 			if(dir == "top"){
-				snake[snake.length-1].style.left = LEFT + "px";  
-				snake[snake.length-1].style.left = TOP - 20 + "px";  
-			}
+				snake[0].style.left = LeFT + "px";
+				snake[0].style.top = ToP - width + "px";
+			};
 			if(dir == "bottom"){
-				snake[snake.length-1].style.left = LEFT + "px";  
-				snake[snake.length-1].style.left = TOP + 20 + "px";  
+				snake[0].style.left = LeFT + "px";
+				snake[0].style.top = ToP + width + "px";
+			};
+			snake.push(snake[0]); //向数组的最后插入数组中下表为0的元素
+			snake.shift(); // 删除下标位0的元素
+			LEFT = parseInt(snake[snake.length-1].style.left);
+			TOP = parseInt(snake[snake.length-1].style.top);
+			if(poit.x == LEFT&&poit.y == TOP){  //判断蛇头与食物相撞。。。
+				creafood()  //重新生成食物
+				miniSnake({x:LEFT,y:TOP}) //插入新蛇头
+				dev.innerHTML = K+10  // 计分器
+				K = K+10;
+				DEV()
+				chi.play()
+			}
+			if(LEFT>780||LEFT<0||TOP>480||TOP<0){  //  小蛇碰撞边框检测
+				if(dir == "rigth"){
+					snake[snake.length-1].style.left = parseInt(snake[0].style.left)- 20 + "px"
+				}
+				if(dir == "left"){
+					snake[snake.length-1].style.left = parseInt(snake[0].style.left)+ 20 + "px"
+				}
+				if(dir == "top"){
+					snake[snake.length-1].style.top = parseInt(snake[0].style.top) + 20 + "px"
+				}
+				if(dir == "bottom"){
+					snake[snake.length-1].style.top = parseInt(snake[0].style.top) - 20 + "px"
+				}
+				clearInterval(Move);    //  死亡停止计时器
+				over.style.display = "block"  //  显示死亡动画
+				micse.pause()
+			}
+			for(var n = 0;n<snake.length-2;n++){
+				HB = parseInt(snake[n].style.left)  // 获取数组中 蛇头所有left值
+				HT = parseInt(snake[n].style.top)  //  获取数组中 蛇头所有top值
+				if(LEFT == HB && TOP == HT){ //  判断蛇头与自身相撞
+					clearInterval(Move); //  死亡停止计时器
+					over.style.display = "block" // 显示死亡动画
+					micse.pause()
+				}
 			}
 
+			if(sele.value == "上帝模式"){
+				God()
+			}
 		}
+		function DEV(){
+			dev.className = "dong"
+			setTimeout(function(){
+				dev.innerHTML = B + 10
+				B +=10;
+				dev.className = "";
+			},300)
+		}
+		// 控制方向
 		window.onkeydown = function(event){
-			if(event.keyCode == 40 && dir !== "top"){
+			if(event.keyCode == 37 && dir != "rigth"){
+				dir = "left"
+			};
+			if(event.keyCode == 38 && dir != "bottom"){
+				dir = "top"
+			};
+			if(event.keyCode == 39 && dir != "left"){
+				dir = "rigth"
+			};
+			if(event.keyCode == 40 && dir !="top"){
 				dir = "bottom"
-			}
-			if(event.keyCode == 39 && dir !== "left"){
-	        	dir = "right"
-	       	}
-	       	if(event.keyCode == 37 && dir !== "right"){
-	         	dir = "left"
-	       	}
-	       	if(event.keyCode == 38 && dir !== "bottom"){
-	       		dir = "top"
-	       	}
+			};
 		}
+		
+		// 生成食物方法
+		function creafood(){
+			if(autoFloat){ //  判断为false 不执行if中的语句
+				wrap.removeChild(wrap.getElementsByTagName('span')[0]) // 删除食物
+			}	
 
-		movement()
-		// ..........小蛇身体颜色.....................................
-		function color(){
-			var but = "#";
-			var arr = [0,1,2,3,4,5,6,7,8,9,"A","B",'C','D','E','F']
-			for(var n = 0;n < 6;n++){
-				var main = Math.floor(Math.random()*16);
-				but=but+arr[main]
+			blankFood()
+
+			wrap.appendChild(food);
+			autoFloat = true;
+		}	
+		creafood();	
+		function blankFood(){
+			poit = {};
+			food = document.createElement("span");
+			poit.x = Math.floor(Math.random()*(800-width)/width)*width;
+			poit.y = Math.floor(Math.random()*(500-width)/width)*width;
+			for(var i = 0 ; i < snake.length;i++){
+				var nawFood1 = parseInt(snake[i].style.left)
+				var nawFood2 = parseInt(snake[i].style.top)
+				if(poit.x == nawFood1 && poit.y == nawFood2){
+					blankFood()
+				}
 			}
-				return but
+			food.style.left = poit.x + "px";
+			food.style.top = poit.y + "px";
 		}
-		var DivList = document.getElementsByClassName("snake")
-		setInterval(function(){
-			for(var i = 0;i < DivList.length;i++){
-				DivList[i].style.backgroundColor = color()
-				DivList[i].style.color = color()
+		//  蛇身颜色	
+		function navList(){
+				var but = "#";
+				var arr = [0,1,2,3,4,5,6,7,8,9,"A",'B','C','D','E','F']
+				for(var i = 0; i<6;i++){
+					var main = Math.floor(Math.random()*16);
+						but=but+arr[main]
+				}
+					return but
+			}	
+		//  暂停游戏	
+		HU.onclick = function(){
+			clearInterval(Move);
+			HY.style.zIndex = 99;
+			HU.style.zIndex = 0;
+			// micse.pause()
+
+		}	
+		//  继续游戏
+		HY.onclick = function(){
+			Move = setInterval(function(){
+				move();
+			},speed);	
+			HU.style.zIndex = 99;
+			HY.style.zIndex = 0;
+			// micse.play()
+		}
+		//  开始游戏		
+		HN.onclick = function(){
+			// 选择难度
+			if(sele.value =="大师"){
+				speed = speed-125;
 			}
-		},300)
+			if(sele.value =="普通"){
+				speed = speed-80;
+			}
+			if(sele.value =="简单"){
+				speed = speed+40;
+			}
+			if(sele.value =="上帝模式"){
+				speed = speed-100;
+			}
+			Move = setInterval(function(){
+				move();
+				for(var i = 0;i<snake.length-1;i++){
+					snake[i].style.backgroundColor = navList()
+				}
+			},speed);
+			// micse.play()
+		}
+		//   智能判断
+		function God(){
+			if(LEFT !== poit.x){
+				if(LEFT > poit.x){
+					//  判断头朝右边时
+					if(dir == "rigth"){
+						for(var n = 0; n<snake.length;n++){  //  循环获取到蛇的所有坐标
+							H1 = parseInt(snake[n].style.left) // 赋值
+							H2 = parseInt(snake[n].style.top) //  赋值
 
+							//  判断当蛇头和自身不相撞
+							if(LEFT == H1 && TOP - 20 == H2){
+								dir = "top"
+							}
+							else{
+								dir = "bottom"
+							}
+							if(LEFT == H1 && TOP + 20 == H2){
+ 								dir = "bottom"
+							}
+							else{
+								dir = "top"
+							}
+							if(LEFT + 20 ==H1 ){
+								if(LEFT == H1 && TOP - 20 == H2){
+									dir = "top"
+								}
+								else{
+									dir = "bottom"
+								}
+								if(LEFT == H1 && TOP + 20 == H2){
+ 									dir = "bottom"
+								}
+								else{
+									dir = "top"
+								}
+							}
+							// if(LEFT > 800 || TOP > 500 || LEFT < 0 || TOP < 0){
 
-
-		// ...生成一条蛇.....................................................
-		miniSnake()
-		setInterval(function(){
-        	movement()
-     	},speed)
+							// }
+						}
+					}
+					else{
+						dir = "left"
+					}
+				}	
+				if(LEFT < poit.x){
+					if(dir == "left"){
+						for(var t = 0;t<snake.length;t++){
+							H3 = parseInt(snake[t].style.left) 
+							H4 = parseInt(snake[t].style.top) 
+							if(LEFT == H3 && TOP - 20 == H4){
+								dir = "top"
+							}
+							else{
+								dir = "bottom"
+							}
+							if(LEFT ==H3 && TOP + 20 == H4){
+								dir = "bottom"
+							}
+							else{
+								dir = "top"
+							}
+						}
+					}
+					else{
+						dir = "rigth"
+					}
+				}
+			}
+			if(LEFT == poit.x && TOP !== poit.y){
+				if(TOP > poit.y){
+					if(dir == "bottom"){
+						for(var l = 0 ; l < snake.length; l++){
+							H5 = parseInt(snake[l].style.left)
+							H6 = parseInt(snake[l].style.top)
+							if(LEFT - 20 == H5 && TOP == H6){
+								dir = "rigth"
+							}
+							else{
+								dir = "left"
+							}
+							if(LEFT + 20 == H5 && TOP == H6){
+								dir = "left"
+							}
+							else{
+								dir = "rigth"
+							}	
+						}
+					}
+					else{
+						dir = "top"
+					}
+				}
+				if(TOP < poit.y){
+					if(dir == "top"){
+						for(var p = 0; p<snake.length;p++){
+							H7 = parseInt(snake[p].style.left)
+							H8 = parseInt(snake[p].style.top)
+							if(LEFT - 20 == H7 && TOP == H8){
+								dir = "rigth"
+							}
+							else{
+								dir = "left"
+							}
+							if(LEFT + 20 == H7 && TOP == H8){
+								dir = "left"
+							}
+							else{
+								dir = "rigth"
+							}
+						}
+					}
+					else{
+						dir = "bottom"
+					}
+				}
+			}
+		}
 	</script>
 </body>
 </html>

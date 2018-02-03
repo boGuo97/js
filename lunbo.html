@@ -6,30 +6,41 @@
 	<style>
 		*{margin: 0;padding: 0;}
 		li{list-style: none;}
+		body{
+
+			/*background-image: url(img/timg12.gif);*/
+		}
 		header{
 			width: 1000px;
 			margin: 0 auto;
 			position: relative;
+			height: 409px;
+			overflow: hidden;
+			margin-top: 50px;
+			border-radius: 10px;
 		}
-		ul{
-			margin-top: 100px;
+		#main{
+			width: 10000px;
+			height: 409px;
+			overflow: hidden;
+			position: absolute;
+			left: 0;
+			top: 0;
 		}
-		.main li{
-			display: none;
-		}
-		.main .lione{
-			display: block;
+		#main li{
+			float: left;
 		}
 		#left,#right{
 			position: absolute;
 			top: 45%;
 			transition:all .5s;
 			cursor: pointer;
-			opacity: .7;
+			transform:scale(1.3) ;
+			opacity: 0;
 		}
 		#left:hover,#right:hover{
-			transform:scale(1.2) ;
-			opacity: 1;
+			transform:scale(1.6) ;
+			/*opacity: 1;*/
 		}
 		#left{
 			left: 20px;
@@ -37,7 +48,7 @@
 		#right{
 			right: 20px;
 		}
-		.nav{overflow: hidden;position: absolute;bottom: 20px;left: 40%;}
+		#nav{overflow: hidden;position: absolute;bottom: 20px;left: 40%;}
 		span{display: block;float: left;width: 18px;height: 18px;border-radius: 50%;
 			margin-left: 10px;background-color: #fff;cursor: pointer;color: transparent;
 		}
@@ -46,8 +57,8 @@
 </head>
 <body>
 	<header>
-		<ul class="main">
-			<li class="lione"><img src="img/1.jpg" alt=""></li>
+		<ul id="main" style="left:0;">
+			<li><img src="img/1.jpg" alt=""></li>
 			<li><img src="img/2.jpg" alt=""></li>
 			<li><img src="img/3.jpg" alt=""></li>
 			<li><img src="img/4.jpg" alt=""></li>
@@ -56,72 +67,151 @@
 		</ul>
 		<img src="img/l.png" alt="" id="left">
 		<img src="img/r.png" alt="" id="right">
-		<div class="nav">
-			<span class="nav-span">0</span>
-			<span>1</span>
-			<span>2</span>
-			<span>3</span>
-			<span>4</span>
-			<span>5</span>
+		<div id="nav">
+			
 		</div>
 	</header>	
 	<script>
+		var header = document.getElementsByTagName("header")[0]
 		var liLise = document.getElementsByTagName('li')
 		var pove = document.getElementById('right')
-		var ktv = document.getElementById('left')
+		var left = document.getElementById('left')
 		var span = document.getElementsByTagName("span")
+		var main = document.getElementById("main")
+		var nav = document.getElementById("nav")
 		var b = 0;
-		var l = 0;
+		var m = 0;
+		var btm = liLise.length
+		var isVirtualHas = false;
+		var lock = false;
 		pove.onclick = function(){
-			for(var i=0;i<liLise.length;i++){
-				liLise[i].className="";
-				span[i].className="";
-			}
-			if(b<liLise.length-1){
+			if(!lock){
 				b++;
-			}
-			else{
-				b=0;
-			}
-				liLise[b].className = "lione";
-				span[b].className = "nav-span"
-		}
-		ktv.onclick = function(){
-			for(var i=0;i<liLise.length;i++){
-				liLise[i].className="";
-				span[i].className="";
-			}
-			if(b!=0){
-				b--;
-			}else{
-				b = liLise.length-1;
-			}
-			liLise[b].className="lione"
-			span[b].className = "nav-span"
-		}
-		for(var i=0;i<span.length;i++){
-			span[i].onclick = function(){
-				b=Number(this.innerHTML)
-				for(var k=0;k<liLise.length;k++){
-					liLise[k].className="";
-					span[k].className="";
+				if(b == btm){
+					newli = liLise[0].cloneNode(true);
+					main.appendChild(newli)
+					m = 0;
 				}
-				span[b].className="nav-span";
-				liLise[b].className="lione"
+				else{
+					m++;
+				}
+				animation("pove")
+			}
+		}	
+
+		  //自动播放
+        var autoPlay = setInterval(function(){
+          pove.onclick()
+        },3000)
+        //智能判断
+        header.onmouseenter = function(){
+          clearInterval(autoPlay)
+          pove.style.opacity = 1
+          left.style.opacity = 1
+        }
+        header.onmouseleave = function(){
+            pove.style.opacity = 0
+          	left.style.opacity = 0
+          autoPlay = setInterval(function(){
+            pove.onclick()
+          },3000)
+        }
+
+
+
+		left.onclick = function(){
+			if(!lock){
+				b--;
+				if(b !== -1){
+					m--;
+					animation("left")
+				}
+				else{
+					b = 0;
+					newli = liLise[liLise.length-1].cloneNode(true)
+					main.insertBefore(newli,main.firstChild)
+					main.style.left = "-1000px"
+					m = btm-1
+					animation("left")
+					isVirtualHas = true;
+				}
 			}
 		}
-	</script>
-	// <script>
-	// 	var lione = document.getElementsByTagName("li")
-	// 	var right = document.getElementById("right")
-	// 	var n = 0;
-	// 	right.onclick = function(){
-	// 		if(n<lione.length-1){
-				
-	// 		}else{
+		function animation(dir){
+			var stop = setInterval(function(){
+				lock = true
+				move = parseInt(main.style.left)
 
-	// 		}
-	// 	}
+				yuandian()
+				if(move == -b*1000){	
+					clearInterval(stop)
+					lock = false;
+					if(b == btm){
+						main.style.left = 0;
+						main.removeChild(newli)
+						b = 0;
+					}
+				if (isVirtualHas){
+					main.style.left = (-(btm-1)*1000) + "px"
+					main.removeChild(newli);
+					b = btm - 1;
+					isVirtualHas = false;
+				};
+				    return
+				}
+				if(dir == "pove"){
+					main.style.left = move + (Math.floor((b *(-1000) - move)/10)) + "px";
+				}
+				if(dir == "left"){
+					main.style.left = move + (Math.ceil((b *(-1000) - move)/10)) + "px";
+				}
+			},30)
+		}
+
+
+
+
+		//小圆点
+
+		for(var i = 0 ; i < btm;i++){
+			var newspan = document.createElement("span");
+			nav.appendChild(newspan)
+		}
+		var spanList = nav.getElementsByTagName("span")
+		spanList[0].className = "nav-span"
+		// 更新小圆点
+
+
+		function yuandian(){
+			for(var c = 0;c < btm;c++){
+				spanList[c].className = "";
+			}
+			spanList[m].className = "nav-span"
+			spanList.innerHTML = spanList[m]
+			lock = true
+		}
+		for(var i =0;i < spanList.length;i++){
+			spanList[i].innerHTML = i
+			spanList[i].onclick = function(){
+			b = Number(this.innerHTML)
+				for(var n = 0; n < liLise.length;n++){
+					spanList[n].className = "";
+				}
+				spanList[b].className = "nav-span"
+				TY = setInterval(function(){
+					T1 = b*(-1000)
+					T2 = parseInt(main.style.left)
+
+					if(T1 !== T2){
+						main.style.left = T2 + Math.floor((T1 - T2)/10) + "px"
+						m = b
+					}
+					else{
+						clearInterval(TY)
+					}
+				},30)
+		}
+	}
 	</script>
 </body>
 </html>

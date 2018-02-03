@@ -112,11 +112,11 @@
 		function guobo(){
 			var nowlist = new Date();
 			var datelist = new Date();
-			var tian = datelist.setDate(30);
-			var yue = datelist.setMonth(0);
-			var shi = datelist.setHours(12);
-			var fen = datelist.setMinutes(0);
-			var miao = datelist.setSeconds(0);
+			datelist.setDate(30);
+			datelist.setMonth(0);
+			datelist.setHours(24);
+			datelist.setMinutes(0);
+			datelist.setSeconds(0);
 			// console.log(nowlist);
 			// console.log(datelist);
 			var s = (datelist - nowlist)/1000;
@@ -136,7 +136,6 @@
 				span1.innerHTML = "0" + n
 			}
 		}
-		guobo()	
 		function navList(){
 				var but = "#";
 				var arr = [0,1,2,3,4,5,6,7,8,9,"A",'B','C','D','E','F']
@@ -146,6 +145,7 @@
 				}
 					return but
 			}	
+		guobo()	
 		setInterval(function(){
 			guobo()	
 			span1.style.color = navList()
@@ -168,10 +168,10 @@
 				BT.style.width = m-1+"px"
 				m = m-1
 			}
+		},2000)
 			if(BU.innerHTML == 0){
 				BU.innerHTML = 0;
 			}
-		},2000)
 	</script>
 </body>
-</html>
+</html>  
